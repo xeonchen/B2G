@@ -307,5 +307,8 @@ if [ $? -ne 0 ]; then
 fi
 
 mv .tmp-config .config
+if [ ! -x .userconfig ]; then
+	ln -sf ~/.userconfig .userconfig
+fi
 
 echo Run \|./build.sh\| to start building
