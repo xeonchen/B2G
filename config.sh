@@ -1,11 +1,11 @@
 #!/bin/bash
 
 REPO=${REPO:-./repo}
-sync_flags=""
+sync_flags="-c -d -j4"
 
 repo_sync() {
 	rm -rf .repo/manifest* &&
-	$REPO init -u $GITREPO -b $BRANCH -m $1.xml $REPO_INIT_FLAGS &&
+	$REPO init -u $GITREPO -b $BRANCH --depth=1 -m $1.xml $REPO_INIT_FLAGS &&
 	$REPO sync $sync_flags $REPO_SYNC_FLAGS
 	ret=$?
 	if [ "$GITREPO" = "$GIT_TEMP_REPO" ]; then
